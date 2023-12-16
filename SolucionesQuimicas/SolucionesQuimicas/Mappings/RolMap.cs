@@ -17,5 +17,7 @@ public class RolMap : ClassMap<Rol>
         Map(x => x.admin);
         HasMany(x => x.usuarios)
             .Cascade.All();
+        HasMany(x=>x.permisos) 
+            .Cascade.All();
     }
 }
