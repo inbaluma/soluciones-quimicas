@@ -14,7 +14,6 @@ namespace Formularios
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Bienvenido());
-            Usuario usuario = new Usuario("pepe");
         }
     }
 }

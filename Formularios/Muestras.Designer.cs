@@ -33,14 +33,14 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            listBox1 = new ListBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            solucionListBox = new ListBox();
+            idTextBox = new TextBox();
+            nifTextBox = new TextBox();
+            cultivoTextBox = new TextBox();
+            insertarButton = new Button();
+            borrarButton = new Button();
+            actualizarButton = new Button();
+            salirButton = new Button();
             dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -48,38 +48,38 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(90, 371);
+            label1.Location = new Point(90, 377);
             label1.Name = "label1";
-            label1.Size = new Size(59, 25);
+            label1.Size = new Size(30, 25);
             label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.Text = "ID";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(90, 432);
+            label2.Location = new Point(90, 433);
             label2.Name = "label2";
-            label2.Size = new Size(59, 25);
+            label2.Size = new Size(39, 25);
             label2.TabIndex = 1;
-            label2.Text = "label2";
+            label2.Text = "NIF";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(90, 483);
+            label3.Location = new Point(81, 489);
             label3.Name = "label3";
-            label3.Size = new Size(59, 25);
+            label3.Size = new Size(67, 25);
             label3.TabIndex = 2;
-            label3.Text = "label3";
+            label3.Text = "Cultivo";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(90, 533);
+            label4.Location = new Point(81, 538);
             label4.Name = "label4";
-            label4.Size = new Size(59, 25);
+            label4.Size = new Size(80, 25);
             label4.TabIndex = 3;
-            label4.Text = "label4";
+            label4.Text = "Solucion";
             // 
             // label5
             // 
@@ -91,71 +91,76 @@
             label5.TabIndex = 4;
             label5.Text = "MUESTRAS";
             // 
-            // listBox1
+            // solucionListBox
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 25;
-            listBox1.Location = new Point(188, 533);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(864, 129);
-            listBox1.TabIndex = 5;
+            solucionListBox.FormattingEnabled = true;
+            solucionListBox.ItemHeight = 25;
+            solucionListBox.Location = new Point(188, 538);
+            solucionListBox.Name = "solucionListBox";
+            solucionListBox.Size = new Size(864, 129);
+            solucionListBox.TabIndex = 5;
             // 
-            // textBox1
+            // idTextBox
             // 
-            textBox1.Location = new Point(188, 371);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(864, 31);
-            textBox1.TabIndex = 6;
+            idTextBox.Location = new Point(188, 371);
+            idTextBox.Name = "idTextBox";
+            idTextBox.ReadOnly = true;
+            idTextBox.Size = new Size(864, 31);
+            idTextBox.TabIndex = 6;
             // 
-            // textBox2
+            // nifTextBox
             // 
-            textBox2.Location = new Point(188, 432);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(864, 31);
-            textBox2.TabIndex = 7;
+            nifTextBox.Location = new Point(188, 427);
+            nifTextBox.Name = "nifTextBox";
+            nifTextBox.Size = new Size(864, 31);
+            nifTextBox.TabIndex = 7;
             // 
-            // textBox3
+            // cultivoTextBox
             // 
-            textBox3.Location = new Point(188, 483);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(864, 31);
-            textBox3.TabIndex = 8;
+            cultivoTextBox.Location = new Point(188, 483);
+            cultivoTextBox.Name = "cultivoTextBox";
+            cultivoTextBox.Size = new Size(864, 31);
+            cultivoTextBox.TabIndex = 8;
             // 
-            // button1
+            // insertarButton
             // 
-            button1.Location = new Point(128, 754);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 9;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            insertarButton.Location = new Point(117, 746);
+            insertarButton.Name = "insertarButton";
+            insertarButton.Size = new Size(112, 34);
+            insertarButton.TabIndex = 9;
+            insertarButton.Text = "Insertar";
+            insertarButton.UseVisualStyleBackColor = true;
+            insertarButton.Click += insertarButton_Click;
             // 
-            // button2
+            // borrarButton
             // 
-            button2.Location = new Point(388, 761);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 34);
-            button2.TabIndex = 10;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            borrarButton.Location = new Point(367, 746);
+            borrarButton.Name = "borrarButton";
+            borrarButton.Size = new Size(112, 34);
+            borrarButton.TabIndex = 10;
+            borrarButton.Text = "Borrar";
+            borrarButton.UseVisualStyleBackColor = true;
+            borrarButton.Click += borrarButton_Click;
             // 
-            // button3
+            // actualizarButton
             // 
-            button3.Location = new Point(647, 746);
-            button3.Name = "button3";
-            button3.Size = new Size(112, 34);
-            button3.TabIndex = 11;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            actualizarButton.Location = new Point(650, 746);
+            actualizarButton.Name = "actualizarButton";
+            actualizarButton.Size = new Size(112, 34);
+            actualizarButton.TabIndex = 11;
+            actualizarButton.Text = "Actualizar";
+            actualizarButton.UseVisualStyleBackColor = true;
+            actualizarButton.Click += actualizarButton_Click;
             // 
-            // button4
+            // salirButton
             // 
-            button4.Location = new Point(917, 748);
-            button4.Name = "button4";
-            button4.Size = new Size(112, 34);
-            button4.TabIndex = 12;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            salirButton.Location = new Point(919, 746);
+            salirButton.Name = "salirButton";
+            salirButton.Size = new Size(112, 34);
+            salirButton.TabIndex = 12;
+            salirButton.Text = "Salir";
+            salirButton.UseVisualStyleBackColor = true;
+            salirButton.Click += salirButton_Click;
             // 
             // dataGridView1
             // 
@@ -166,6 +171,7 @@
             dataGridView1.RowTemplate.Height = 33;
             dataGridView1.Size = new Size(962, 225);
             dataGridView1.TabIndex = 13;
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // Muestras
             // 
@@ -173,14 +179,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 820);
             Controls.Add(dataGridView1);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(listBox1);
+            Controls.Add(salirButton);
+            Controls.Add(actualizarButton);
+            Controls.Add(borrarButton);
+            Controls.Add(insertarButton);
+            Controls.Add(cultivoTextBox);
+            Controls.Add(nifTextBox);
+            Controls.Add(idTextBox);
+            Controls.Add(solucionListBox);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -200,14 +206,14 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private ListBox listBox1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private ListBox solucionListBox;
+        private TextBox idTextBox;
+        private TextBox nifTextBox;
+        private TextBox cultivoTextBox;
+        private Button insertarButton;
+        private Button borrarButton;
+        private Button actualizarButton;
+        private Button salirButton;
         private DataGridView dataGridView1;
     }
 }

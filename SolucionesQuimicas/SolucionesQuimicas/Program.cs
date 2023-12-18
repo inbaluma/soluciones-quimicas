@@ -29,7 +29,7 @@ public class Program
         }
     }
 
-    private static void populateDataBase()
+    public static void populateDataBase()
     {
         var sessionFactory = ConexionBD.CreateSessionFactory();
 

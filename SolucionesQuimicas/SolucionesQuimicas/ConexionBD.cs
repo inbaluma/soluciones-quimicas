@@ -19,7 +19,7 @@ public class ConexionBD
                 .UsingFile(DbFile))
             .Mappings(m =>
                 m.FluentMappings.AddFromAssemblyOf<ConexionBD>())
-            .ExposeConfiguration(BuildSchema)
+            //.ExposeConfiguration(BuildSchema)
             .BuildSessionFactory();
     }
 
