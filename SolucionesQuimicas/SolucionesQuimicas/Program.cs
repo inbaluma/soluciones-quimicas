@@ -9,13 +9,12 @@ using NHibernate.Linq.Expressions;
 namespace SolucionesQuimicas;
 public class Program
 {
-    private const string DbFile = "solucionesQuimicas.db";
 
     static void Main()
     {
         populateDataBase();
 
-        var sessionFactory = CreateSessionFactory();
+        var sessionFactory = ConexionBD.CreateSessionFactory();
         
         using (var session = sessionFactory.OpenSession())
         {
@@ -30,32 +29,9 @@ public class Program
         }
     }
 
-    public static ISessionFactory CreateSessionFactory()
-    {
-
-        return Fluently.Configure()
-            .Database(SQLiteConfiguration.Standard
-                .UsingFile(DbFile))
-            .Mappings(m =>
-                m.FluentMappings.AddFromAssemblyOf<Program>())
-            .ExposeConfiguration(BuildSchema)
-            .BuildSessionFactory();
-    }
-    private static void BuildSchema(Configuration config)
-    {
-        // delete the existing db on each run
-        if (File.Exists(DbFile))
-            File.Delete(DbFile);
-
-        // this NHibernate tool takes a configuration (with mapping info in)
-        // and exports a database schema from it
-        new SchemaExport(config)
-            .Create(false, true);
-    }
-
     private static void populateDataBase()
     {
-        var sessionFactory = CreateSessionFactory();
+        var sessionFactory = ConexionBD.CreateSessionFactory();
 
         using (var session = sessionFactory.OpenSession())
         {
