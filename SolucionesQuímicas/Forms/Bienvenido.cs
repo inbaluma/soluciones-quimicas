@@ -17,16 +17,14 @@ namespace SolucionesQuimicas.Forms
 
             using (var session = sessionFactory.OpenSession())
             {
-                using (session.BeginTransaction())
-                {
-                    var usuarios = session.Query<Usuario>().Where
-                    (x => x.nif == usuarioTextBox.Text && x.password == passwordTextBox.Text)
+                var usuarios = session.Query<Usuario>()
+                    .Where(x => x.nif == usuarioTextBox.Text && x.password == passwordTextBox.Text)
                     .ToArray();
-                    if (usuarios.Length > 0)
-                    {
-                        usuario = usuarios[0];
-                    }
+                if (usuarios.Length > 0)
+                {
+                    usuario = usuarios[0];
                 }
+
             }
             return usuario;
         }

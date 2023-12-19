@@ -2,14 +2,15 @@
 public class Muestra
 {
     public virtual int ID { get; protected set; }
-    public virtual string NIF_Paciente { get; set; }
-    public virtual string Cultivo { get; set; }
+    public virtual string? NIF_Paciente { get; set; }
+    public virtual string? Cultivo { get; set; }
     public virtual Solucion Solucion { get; set; }
 
+    public Muestra() { }
 
-    public override string ToString()
+    public Muestra(Solucion solucion)
     {
-        return $"{NIF_Paciente}, {Cultivo}, solucion: {Solucion}";
+        solucion.AddMuestra(this);
     }
 
     public virtual void Delete()

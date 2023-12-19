@@ -128,7 +128,7 @@
             Controls.Add(okButton);
             KeyPreview = true;
             Name = "Bienvenido";
-            Text = "Hola";
+            Text = "Bienvenido";
             ResumeLayout(false);
             PerformLayout();
         }

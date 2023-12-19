@@ -3,8 +3,8 @@
 public class Solucion
 {
     public virtual int ID { get; protected set; }
-    public virtual string solucion { get; set; }
-    public virtual string uso { get; set; }
+    public virtual string? solucion { get; set; }
+    public virtual string? uso { get; set; }
     public virtual IList<Muestra> muestras { get; protected set; }
 
     public Solucion()
@@ -20,12 +20,20 @@ public class Solucion
 
     public virtual void RemoveMuestra(Muestra muestra)
     {
-        muestra.Solucion = null;
         muestras.Remove(muestra);
     }
 
     public override string ToString()
     {
-        return solucion;
+        string res;
+        if (solucion != null)
+        {
+            res = solucion;
+        }
+        else
+        {
+            res = "" + ID;
+        }
+        return res;
     }
 }

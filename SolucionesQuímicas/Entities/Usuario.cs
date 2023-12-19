@@ -11,9 +11,11 @@ public class Usuario
 
     }
 
-    public Usuario(String nif)
+    public Usuario(string nif, string password, Rol rol)
     {
         this.nif = nif;
+        this.password = password;
+        rol.addUsuario(this);
     }
 
     public override string ToString()

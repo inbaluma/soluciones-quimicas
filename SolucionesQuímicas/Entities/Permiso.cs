@@ -10,16 +10,15 @@ public class Permiso
 
     public Permiso() { }
 
-    public Permiso(Rol rol, String pantalla)
+    public Permiso(Rol rol, String pantalla, bool acceso, bool insertar, bool modificar, bool borrar)
     {
         this.rol = rol;
         this.pantalla = pantalla;
         rol.addPermiso(this);
-    }
-
-    public override string ToString()
-    {
-        return $"{rol.rolName}, {pantalla}, acceso: {acceso}, insertar: {insertar}, modificar: {modificar}, borrar: {borrar}";
+        this.acceso = acceso;
+        this.insertar = insertar;
+        this.modificar = modificar;
+        this.borrar = borrar;
     }
 
     public override bool Equals(object? obj)

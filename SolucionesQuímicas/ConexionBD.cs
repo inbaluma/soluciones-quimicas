@@ -19,20 +19,7 @@ public class ConexionBD
                 .UsingFile(DbFile))
             .Mappings(m =>
                 m.FluentMappings.AddFromAssemblyOf<ConexionBD>())
-            //.ExposeConfiguration(BuildSchema)
             .BuildSessionFactory();
-    }
-
-    private static void BuildSchema(Configuration config)
-    {
-        // delete the existing db on each run
-        if (File.Exists(DbFile))
-            File.Delete(DbFile);
-
-        // this NHibernate tool takes a configuration (with mapping info in)
-        // and exports a database schema from it
-        new SchemaExport(config)
-            .Create(false, true);
     }
 
     public static void populateDataBase()
@@ -43,25 +30,20 @@ public class ConexionBD
         {
             using (var transaction = session.BeginTransaction())
             {
-                var admin = new Rol("Administrador") { admin = true };
-                var quimico = new Rol("Quimico") { admin = false };
-                var usuario = new Rol("Usuario") { admin = false };
-                var invitado = new Rol("Invitado") { admin = false };
+                var admin = new Rol("Administrador", true);
+                var quimico = new Rol("Quimico", false);
+                var usuario = new Rol("Usuario", false);
+                var invitado = new Rol("Invitado", false);
 
-                var pepe = new Usuario("pepe") { password = "pepe" };
-                var marta = new Usuario("marta") { password = "marta" };
-                var antonio = new Usuario("antonio") { password = "antonio" };
-                var ana = new Usuario("ana") { password = "ana" };
+                var pepe = new Usuario("pepe", "pepe", admin);
+                var marta = new Usuario("marta", "marta", quimico);
+                var antonio = new Usuario("antonio", "antonio", usuario);
+                var ana = new Usuario("ana", "ana", invitado);
 
-                admin.addUsuario(pepe);
-                quimico.addUsuario(marta);
-                usuario.addUsuario(antonio);
-                invitado.addUsuario(ana);
-
-                var permiso1 = new Permiso(admin, "MUESTRAS") { acceso = true, modificar = true, insertar = true, borrar = true };
-                var permiso2 = new Permiso(quimico, "MUESTRAS") { acceso = true, modificar = false, insertar = true, borrar = false };
-                var permiso3 = new Permiso(usuario, "MUESTRAS") { acceso = true, modificar = false, insertar = false, borrar = false };
-                var permiso4 = new Permiso(invitado, "MUESTRAS") { acceso = false, modificar = false, insertar = false, borrar = false };
+                var permiso1 = new Permiso(admin, "MUESTRAS", true, true, true, true);
+                var permiso2 = new Permiso(quimico, "MUESTRAS", true, true, false, false);
+                var permiso3 = new Permiso(usuario, "MUESTRAS", true, false, false, false);
+                var permiso4 = new Permiso(invitado, "MUESTRAS", false, false, false, false);
 
                 session.SaveOrUpdate(admin);
                 session.SaveOrUpdate(quimico);
@@ -69,14 +51,11 @@ public class ConexionBD
                 session.SaveOrUpdate(invitado);
 
 
-                var muestra1 = new Muestra { NIF_Paciente = "11111111A", Cultivo = "SANGRE" };
-                var muestra2 = new Muestra { NIF_Paciente = "22222222B", Cultivo = "orina" };
-
                 var solucion1 = new Solucion { solucion = "Azul de metileno" };
                 var solucion2 = new Solucion { solucion = "Colorante" };
 
-                solucion1.AddMuestra(muestra1);
-                solucion2.AddMuestra(muestra2);
+                var muestra1 = new Muestra(solucion1) { NIF_Paciente = "11111111A", Cultivo = "SANGRE" };
+                var muestra2 = new Muestra(solucion2) { NIF_Paciente = "22222222B", Cultivo = "orina" };
 
                 session.SaveOrUpdate(solucion1);
                 session.SaveOrUpdate(solucion2);
