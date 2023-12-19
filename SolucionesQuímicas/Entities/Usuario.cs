@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Entities;
+﻿namespace SolucionesQuimicas.Entities;
 
 public class Usuario
 {

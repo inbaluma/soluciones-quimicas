@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Entities;
+﻿namespace SolucionesQuimicas.Entities;
 
 public class Solucion
 {
@@ -18,8 +18,14 @@ public class Solucion
         muestras.Add(muestra);
     }
 
+    public virtual void RemoveMuestra(Muestra muestra)
+    {
+        muestra.Solucion = null;
+        muestras.Remove(muestra);
+    }
+
     public override string ToString()
     {
-        return solucion + "; " + uso;
+        return solucion;
     }
 }

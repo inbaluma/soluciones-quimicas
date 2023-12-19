@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
-using SolucionesQuímicas.Entities;
+﻿using FluentNHibernate.Mapping;
+using SolucionesQuimicas.Entities;
 
-namespace SolucionesQuímicas.Mappings;
+namespace SolucionesQuimicas.Mappings;
 
 public class MuestraMap : ClassMap<Muestra>
 {
-    public MuestraMap() 
+    public MuestraMap()
     {
         Id(x => x.ID);
         Map(x => x.NIF_Paciente);

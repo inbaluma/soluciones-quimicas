@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
-using SolucionesQuímicas.Entities;
+﻿using FluentNHibernate.Mapping;
+using SolucionesQuimicas.Entities;
 
-namespace SolucionesQuímicas.Mappings;
+namespace SolucionesQuimicas.Mappings;
 
 public class RolMap : ClassMap<Rol>
 {
-    public RolMap() 
+    public RolMap()
     {
         Id(x => x.rolName);
         Map(x => x.rolDes);
         Map(x => x.admin);
         HasMany(x => x.usuarios)
             .Cascade.All();
-        HasMany(x=>x.permisos) 
+        HasMany(x => x.permisos)
             .Cascade.All();
     }
 }

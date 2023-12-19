@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Entities;
+﻿namespace SolucionesQuimicas.Entities;
 public class Muestra
 {
     public virtual int ID { get; protected set; }
@@ -10,5 +10,19 @@ public class Muestra
     public override string ToString()
     {
         return $"{NIF_Paciente}, {Cultivo}, solucion: {Solucion}";
+    }
+
+    public virtual void Delete()
+    {
+        Solucion.RemoveMuestra(this);
+    }
+
+    public virtual void cambiaSolucion(Solucion solucion)
+    {
+        if (solucion != Solucion)
+        {
+            Solucion.RemoveMuestra(this);
+            solucion.AddMuestra(this);
+        }
     }
 }

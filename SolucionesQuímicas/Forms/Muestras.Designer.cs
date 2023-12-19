@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Forms
+﻿namespace SolucionesQuimicas.Forms
 {
     partial class Muestras
     {
@@ -42,6 +42,8 @@
             actualizarButton = new Button();
             salirButton = new Button();
             dataGridView1 = new DataGridView();
+            controlLabel = new Label();
+            limpiarButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -134,7 +136,7 @@
             // 
             // borrarButton
             // 
-            borrarButton.Location = new Point(367, 746);
+            borrarButton.Location = new Point(320, 746);
             borrarButton.Name = "borrarButton";
             borrarButton.Size = new Size(112, 34);
             borrarButton.TabIndex = 10;
@@ -144,7 +146,7 @@
             // 
             // actualizarButton
             // 
-            actualizarButton.Location = new Point(650, 746);
+            actualizarButton.Location = new Point(520, 746);
             actualizarButton.Name = "actualizarButton";
             actualizarButton.Size = new Size(112, 34);
             actualizarButton.TabIndex = 11;
@@ -173,11 +175,31 @@
             dataGridView1.TabIndex = 13;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
+            // controlLabel
+            // 
+            controlLabel.AutoSize = true;
+            controlLabel.Location = new Point(117, 696);
+            controlLabel.Name = "controlLabel";
+            controlLabel.Size = new Size(0, 25);
+            controlLabel.TabIndex = 14;
+            // 
+            // limpiarButton
+            // 
+            limpiarButton.Location = new Point(728, 746);
+            limpiarButton.Name = "limpiarButton";
+            limpiarButton.Size = new Size(112, 34);
+            limpiarButton.TabIndex = 15;
+            limpiarButton.Text = "Limpiar";
+            limpiarButton.UseVisualStyleBackColor = true;
+            limpiarButton.Click += limpiarButton_Click;
+            // 
             // Muestras
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1154, 820);
+            Controls.Add(limpiarButton);
+            Controls.Add(controlLabel);
             Controls.Add(dataGridView1);
             Controls.Add(salirButton);
             Controls.Add(actualizarButton);
@@ -194,6 +216,7 @@
             Controls.Add(label1);
             Name = "Muestras";
             Text = "Muestras";
+            FormClosed += Muestras_FormClosed;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -215,5 +238,7 @@
         private Button actualizarButton;
         private Button salirButton;
         private DataGridView dataGridView1;
+        private Label controlLabel;
+        private Button limpiarButton;
     }
 }

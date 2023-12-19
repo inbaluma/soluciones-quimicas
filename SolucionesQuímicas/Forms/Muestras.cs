@@ -1,37 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using NHibernate;
-using NHibernate.Util;
-using SolucionesQuímicas;
-using SolucionesQuímicas.Entities;
+using SolucionesQuimicas.Entities;
 
 
 
-namespace SolucionesQuímicas.Forms
+namespace SolucionesQuimicas.Forms
 {
     public partial class Muestras : Form
     {
-        private ISessionFactory sessionFactory;
         private Muestra muestraSeleccionada;
         private ISession session;
+        private static readonly string PANTALLA = "MUESTRAS";
 
-        public Muestras()
+        public Muestras(Usuario usuario)
         {
             InitializeComponent();
-            sessionFactory = ConexionBD.CreateSessionFactory();
-            session = sessionFactory.OpenSession();
-
-            var soluciones = session.CreateCriteria(typeof(Solucion))
+            session = ConexionBD.CreateSessionFactory().OpenSession();
+            bool acceso = false;
+            if (usuario.rol != null)
+            {
+                // Comprobamos los permisos
+                var permisos = session.Query<Permiso>()
+                    .Where(x => PANTALLA.Equals(x.pantalla) && usuario.rol.rolName.Equals(x.rol.rolName))
+                    .ToArray();
+                if (permisos.Length > 0)
+                {
+                    Permiso permiso = permisos[0];
+                    if (permiso.acceso)
+                        acceso = true;
+                    if (!permiso.insertar)
+                        insertarButton.Enabled = false;
+                    if (!permiso.borrar)
+                        borrarButton.Enabled = false;
+                    if (!permiso.modificar)
+                        actualizarButton.Enabled = false;
+                }
+            }
+            if (acceso)
+            {
+                var soluciones = session.CreateCriteria(typeof(Solucion))
                 .List<Solucion>();
-            solucionListBox.DataSource = soluciones;
-            updateDataGridView();
+                solucionListBox.DataSource = soluciones;
+                updateDataGridView();
+            }
         }
 
         private void insertarButton_Click(object sender, EventArgs e)
@@ -48,38 +59,66 @@ namespace SolucionesQuímicas.Forms
                 session.SaveOrUpdate(solucion);
 
                 transaction.Commit();
+
+                muestraSeleccionada = muestra;
             }
             updateDataGridView();
         }
 
         private void borrarButton_Click(object sender, EventArgs e)
         {
+            if (muestraSeleccionada != null)
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    muestraSeleccionada.Delete();
+                    session.Delete(muestraSeleccionada);
+                    muestraSeleccionada = null;
 
+                    transaction.Commit();
+                }
+                updateDataGridView();
+            }
+            else
+            {
+                controlLabel.Text = "Seleccione una muestra para borrarla.";
+            }
         }
 
         private void salirButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-
+            Close();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-
-            using (var session = sessionFactory.OpenSession())
+            var rows = dataGridView1.SelectedRows;
+            if (rows != null && rows.Count > 0)
             {
-                var rows = dataGridView1.SelectedRows;
-                if (rows != null && rows.Count > 0)
-                {
-                    Muestra muestra = rows[0].DataBoundItem as Muestra;
-                    setMuestraSeleccionada(muestra);
-                }
+                Muestra muestra = rows[0].DataBoundItem as Muestra;
+                setMuestraSeleccionada(muestra);
             }
+            controlLabel.Text = string.Empty;
         }
 
         private void actualizarButton_Click(object sender, EventArgs e)
         {
+            if (muestraSeleccionada != null)
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    muestraSeleccionada.NIF_Paciente = nifTextBox.Text;
+                    muestraSeleccionada.Cultivo = cultivoTextBox.Text;
+                    muestraSeleccionada.cambiaSolucion(solucionListBox.SelectedItem as Solucion);
 
+                    transaction.Commit();
+                }
+                updateDataGridView();
+            }
+            else
+            {
+                controlLabel.Text = "Seleccione una muestra para actualizarla.";
+            }
         }
 
         private void setMuestraSeleccionada(Muestra muestra)
@@ -98,6 +137,7 @@ namespace SolucionesQuímicas.Forms
                 nifTextBox.Text = muestra.NIF_Paciente;
                 cultivoTextBox.Text = muestra.Cultivo;
                 solucionListBox.SelectedItem = muestra.Solucion;
+                muestraSeleccionada = muestra;
             }
         }
         private void updateDataGridView()
@@ -105,6 +145,20 @@ namespace SolucionesQuímicas.Forms
             var muestras = session.CreateCriteria(typeof(Muestra))
                 .List<Muestra>();
             dataGridView1.DataSource = muestras;
+        }
+
+        private void Muestras_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            session.Dispose();
+        }
+
+        private void limpiarButton_Click(object sender, EventArgs e)
+        {
+            muestraSeleccionada = null;
+            idTextBox.Text = string.Empty;
+            nifTextBox.Text = string.Empty;
+            cultivoTextBox.Text = string.Empty;
+            solucionListBox.SelectedItem = null;
         }
     }
 }

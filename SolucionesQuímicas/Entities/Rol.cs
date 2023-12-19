@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Entities;
+﻿namespace SolucionesQuimicas.Entities;
 public class Rol
 {
     public virtual string rolName { get; protected set; }
@@ -7,7 +7,7 @@ public class Rol
     public virtual IList<Usuario> usuarios { get; protected set; }
     public virtual IList<Permiso> permisos { get; protected set; }
 
-    public Rol() 
+    public Rol()
     {
         usuarios = new List<Usuario>();
         permisos = new List<Permiso>();

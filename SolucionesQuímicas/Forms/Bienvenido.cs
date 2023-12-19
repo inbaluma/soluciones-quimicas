@@ -1,20 +1,7 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using NHibernate.Hql.Ast;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
-using SolucionesQuímicas;
-using SolucionesQuímicas.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+﻿using System.Data;
+using SolucionesQuimicas.Entities;
 
-namespace SolucionesQuímicas.Forms
+namespace SolucionesQuimicas.Forms
 {
     public partial class Bienvenido : Form
     {
@@ -22,9 +9,9 @@ namespace SolucionesQuímicas.Forms
         {
             InitializeComponent();
         }
-        private bool inDataBase()
+        private Usuario getUsuario()
         {
-            bool solucion = false;
+            Usuario usuario = null;
 
             var sessionFactory = ConexionBD.CreateSessionFactory();
 
@@ -32,25 +19,26 @@ namespace SolucionesQuímicas.Forms
             {
                 using (session.BeginTransaction())
                 {
-                    foreach (var usuario in session.Query<Usuario>().Where
-                    (x => x.nif == usuarioTextBox.Text && x.password == passwordTextBox.Text))
+                    var usuarios = session.Query<Usuario>().Where
+                    (x => x.nif == usuarioTextBox.Text && x.password == passwordTextBox.Text)
+                    .ToArray();
+                    if (usuarios.Length > 0)
                     {
-
-                        solucion = true;
-
+                        usuario = usuarios[0];
                     }
                 }
             }
-            return solucion;
+            return usuario;
         }
 
         private async void okButton_Click(object sender, EventArgs e)
         {
-            if (inDataBase() == true)
+            Usuario usuario = getUsuario();
+            if (usuario != null)
             {
                 this.Hide();
 
-                Muestras muestra = new Muestras();
+                Muestras muestra = new Muestras(usuario);
 
                 muestra.ShowDialog();
 

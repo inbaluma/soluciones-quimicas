@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
-using SolucionesQuímicas.Entities;
+﻿using FluentNHibernate.Mapping;
+using SolucionesQuimicas.Entities;
 
-namespace SolucionesQuímicas.Mappings;
+namespace SolucionesQuimicas.Mappings;
 
 public class PermisoMap : ClassMap<Permiso>
 {
-    public PermisoMap() 
+    public PermisoMap()
     {
-        Id(x => x.id);
-        References(x => x.rol);
-        Map(x => x.pantalla, "Pantalla");
+        CompositeId()
+            .KeyReference(x => x.rol, "id_rol")
+            .KeyProperty(x => x.pantalla);
         Map(x => x.acceso);
         Map(x => x.insertar);
         Map(x => x.modificar);
