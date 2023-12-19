@@ -22,7 +22,7 @@ namespace SolucionesQuímicas.Forms
         private Muestra muestraSeleccionada;
         private ISession session;
 
-        public Muestras()
+        public Muestras(String name, String rol)
         {
             InitializeComponent();
             sessionFactory = ConexionBD.CreateSessionFactory();
@@ -32,6 +32,8 @@ namespace SolucionesQuímicas.Forms
                 .List<Solucion>();
             solucionListBox.DataSource = soluciones;
             updateDataGridView();
+            usuarioLabel.Text = String.Format("{0} {1}", name, rol);
+
         }
 
         private void insertarButton_Click(object sender, EventArgs e)

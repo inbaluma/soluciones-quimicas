@@ -18,6 +18,9 @@ namespace SolucionesQuímicas.Forms
 {
     public partial class Bienvenido : Form
     {
+        String NIF = "";
+        String ID_ROL = "";
+
         public Bienvenido()
         {
             InitializeComponent();
@@ -35,7 +38,8 @@ namespace SolucionesQuímicas.Forms
                     foreach (var usuario in session.Query<Usuario>().Where
                     (x => x.nif == usuarioTextBox.Text && x.password == passwordTextBox.Text))
                     {
-
+                        this.NIF = usuario.nif;
+                        this.ID_ROL = usuario.rol.getName();
                         solucion = true;
 
                     }
@@ -50,7 +54,7 @@ namespace SolucionesQuímicas.Forms
             {
                 this.Hide();
 
-                Muestras muestra = new Muestras();
+                Muestras muestra = new Muestras(NIF, ID_ROL);
 
                 muestra.ShowDialog();
 
