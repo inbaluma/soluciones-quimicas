@@ -31,4 +31,9 @@ public class Rol
     {
         permisos.Add(permiso);
     }
+
+    public virtual String getName()
+    {
+        return this.rolName;
+    }
 }
