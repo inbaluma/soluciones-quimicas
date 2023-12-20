@@ -1,4 +1,4 @@
-﻿namespace SolucionesQuímicas.Forms
+﻿namespace SolucionesQuimicas.Forms
 {
     partial class Bienvenido
     {
@@ -40,10 +40,9 @@
             // 
             // okButton
             // 
-            okButton.Location = new Point(76, 214);
-            okButton.Margin = new Padding(2);
+            okButton.Location = new Point(109, 357);
             okButton.Name = "okButton";
-            okButton.Size = new Size(78, 20);
+            okButton.Size = new Size(111, 33);
             okButton.TabIndex = 0;
             okButton.Text = "OK";
             okButton.UseVisualStyleBackColor = true;
@@ -51,10 +50,9 @@
             // 
             // cancelButton
             // 
-            cancelButton.Location = new Point(219, 214);
-            cancelButton.Margin = new Padding(2);
+            cancelButton.Location = new Point(313, 357);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(78, 20);
+            cancelButton.Size = new Size(111, 33);
             cancelButton.TabIndex = 1;
             cancelButton.Text = "CANCEL";
             cancelButton.UseVisualStyleBackColor = true;
@@ -64,47 +62,42 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(94, 18);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(134, 30);
             label1.Name = "label1";
-            label1.Size = new Size(185, 46);
+            label1.Size = new Size(272, 67);
             label1.TabIndex = 2;
             label1.Text = "Bienvenido";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(86, 96);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(123, 160);
             label2.Name = "label2";
-            label2.Size = new Size(47, 15);
+            label2.Size = new Size(72, 25);
             label2.TabIndex = 3;
             label2.Text = "Usuario";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(76, 138);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(109, 230);
             label3.Name = "label3";
-            label3.Size = new Size(57, 15);
+            label3.Size = new Size(87, 25);
             label3.TabIndex = 4;
             label3.Text = "Password";
             // 
             // usuarioTextBox
             // 
-            usuarioTextBox.Location = new Point(173, 93);
-            usuarioTextBox.Margin = new Padding(2);
+            usuarioTextBox.Location = new Point(247, 155);
             usuarioTextBox.Name = "usuarioTextBox";
-            usuarioTextBox.Size = new Size(106, 23);
+            usuarioTextBox.Size = new Size(150, 31);
             usuarioTextBox.TabIndex = 5;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(173, 135);
-            passwordTextBox.Margin = new Padding(2);
+            passwordTextBox.Location = new Point(247, 225);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(106, 23);
+            passwordTextBox.Size = new Size(150, 31);
             passwordTextBox.TabIndex = 6;
             // 
             // loginLabel
@@ -112,10 +105,9 @@
             loginLabel.AutoSize = true;
             loginLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             loginLabel.ForeColor = Color.Red;
-            loginLabel.Location = new Point(11, 181);
-            loginLabel.Margin = new Padding(2, 0, 2, 0);
+            loginLabel.Location = new Point(16, 302);
             loginLabel.Name = "loginLabel";
-            loginLabel.Size = new Size(344, 13);
+            loginLabel.Size = new Size(461, 21);
             loginLabel.TabIndex = 7;
             loginLabel.Text = "Credenciales Incorrectas: compruebe los datos de inicio de sesión";
             loginLabel.Visible = false;
@@ -123,9 +115,9 @@
             // Bienvenido
             // 
             AcceptButton = okButton;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(363, 270);
+            ClientSize = new Size(519, 450);
             Controls.Add(loginLabel);
             Controls.Add(passwordTextBox);
             Controls.Add(usuarioTextBox);
@@ -135,9 +127,8 @@
             Controls.Add(cancelButton);
             Controls.Add(okButton);
             KeyPreview = true;
-            Margin = new Padding(2);
             Name = "Bienvenido";
-            Text = "Hola";
+            Text = "Bienvenido";
             ResumeLayout(false);
             PerformLayout();
         }
