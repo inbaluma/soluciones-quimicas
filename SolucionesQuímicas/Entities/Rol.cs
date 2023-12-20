@@ -6,13 +6,13 @@ public class Rol
     public virtual bool admin { get; set; }
     public virtual IList<Usuario> usuarios { get; protected set; }
     public virtual IList<Permiso> permisos { get; protected set; }
-    
+
     public Rol()
     {
         usuarios = new List<Usuario>();
         permisos = new List<Permiso>();
     }
-    
+
     public Rol(String name, bool admin)
     {
         rolName = name;

@@ -11,7 +11,7 @@ namespace SolucionesQuimicas.Forms
         }
         private Usuario getUsuario()
         {
-            Usuario usuario = null;
+            Usuario? usuario = null;
 
             var sessionFactory = ConexionBD.CreateSessionFactory();
 

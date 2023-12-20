@@ -108,7 +108,6 @@ namespace SolucionesQuimicas.Forms
                 setMuestraSeleccionada(muestra);
             }
             controlLabel.Text = string.Empty;
-            MessageBox.Show(muestraSeleccionada != null ? muestraSeleccionada.ID+"" : "null");
         }
 
         private void actualizarButton_Click(object sender, EventArgs e)
